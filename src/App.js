@@ -4,6 +4,7 @@ import CurrentWeather from "./components/search/current-weather/current-weather"
 import { WEATHER_API_URL } from "./api";
 import { WEATHER_API_KEY } from "./api";
 import { useState } from "react";
+import ForeCast from "./components/search/forecast/forecast";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
@@ -19,7 +20,7 @@ function App() {
     );
     //fetches for forecast
     const forecastFetch = fetch(
-      `${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}}&units=metric`
+      `${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
     );
 
     //executes both our fetches
@@ -28,7 +29,7 @@ function App() {
         const weatherResponse = await response[0].json();
         const forecastResponse = await response[1].json();
 
-        //set cxrrent weather and forcast to result of search
+        //set current weather and forcast to result of search
         setCurrentWeather({ city: searchData.label, ...weatherResponse });
         setForecast({ city: searchData.labek, ...forecastResponse });
       })
@@ -44,6 +45,7 @@ function App() {
       <Search onSearchChange={handleOnSearchChange} />
       {/* Below says that if currentWeather variable exists, render CurrentWeather component */}
       {currentWeather && <CurrentWeather data={currentWeather} />}
+      {forecast && <ForeCast data={forecast}></ForeCast>}
     </div>
   );
 }

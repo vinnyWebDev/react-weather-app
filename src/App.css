@@ -1,5 +1,5 @@
 .container{
-    max-width: 1080px;
+  max-width: 1080px;
   /*Top and bottom 20px left and right centered*/
   margin: 20px auto;
 }
